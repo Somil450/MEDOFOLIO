@@ -1,0 +1,9 @@
+uploads/
+*.zip
+*.pdf
+*.jpg
+*.png
+*.mp4
+*.exe
+node_modules/
+.env

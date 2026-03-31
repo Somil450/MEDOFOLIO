@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedoFolio - Healthcare Management System</title>
+    <link rel="stylesheet" href="assets/style-enhanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .demo-header {
+            background: linear-gradient(135deg, #0066CC, #004499);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .demo-header::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .demo-content {
+            position: relative;
+            z-index: 1;
+        }
+        .demo-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .demo-subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .demo-feature {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #0066CC;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+        .demo-feature:hover {
+            transform: translateY(-4px);
+        }
+        .demo-feature h3 {
+            color: #0066CC;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+        .demo-feature p {
+            color: #3B3A39;
+            line-height: 1.6;
+        }
+        .demo-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .demo-btn {
+            background: linear-gradient(135deg, #0066CC, #004499);
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .demo-btn:hover {
+            transform: translateY(-2px);
+        }
+        .demo-btn.secondary {
+            background: linear-gradient(135deg, #0A7E0A, #065F06);
+        }
+        .demo-note {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 24px 0;
+            font-size: 18px;
+        }
+        .demo-note strong {
+            color: #FF6B00;
+        }
+        @media (max-width: 768px) {
+            .demo-title {
+                font-size: 32px;
+            }
+            .demo-features {
+                grid-template-columns: 1fr;
+            }
+            .demo-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <div class="demo-content">
+                <h1 class="demo-title">🏥 MedoFolio</h1>
+                <p class="demo-subtitle">Advanced Healthcare Management System</p>
+            </div>
+        </div>
+
+        <div class="demo-features">
+            <div class="demo-feature">
+                <h3>📊 Dynamic Health Charts</h3>
+                <p>Real-time visualization of your health data with interactive charts and analytics for better health insights.</p>
+            </div>
+            <div class="demo-feature">
+                <h3>📄 PDF Management</h3>
+                <p>Upload, view, and manage your medical reports with secure PDF handling and organization.</p>
+            </div>
+            <div class="demo-feature">
+                <h3>🌙 Dark Mode</h3>
+                <p>Comfortable dark/light theme switching with smooth transitions and persistent preferences.</p>
+            </div>
+            <div class="demo-feature">
+                <h3>📱 Responsive Design</h3>
+                <p>Perfect mobile experience with adaptive layouts and touch-friendly interfaces.</p>
+            </div>
+            <div class="demo-feature">
+                <h3>🔒 Secure Authentication</h3>
+                <p>Protected user accounts with encrypted passwords and session management.</p>
+            </div>
+            <div class="demo-feature">
+                <h3>🧠 AI Health Analysis</h3>
+                <p>Intelligent health summaries and risk assessments powered by AI algorithms.</p>
+            </div>
+        </div>
+
+        <div class="demo-note">
+            <strong>📝 Note:</strong> This is a static demo of MedoFolio. For the full interactive experience with database functionality, 
+            please deploy the complete application using our deployment guides.
+        </div>
+
+        <div class="demo-actions">
+            <a href="https://github.com/Somil450/healthintel" class="demo-btn" target="_blank">
+                📂 View Source Code
+            </a>
+            <a href="https://github.com/Somil450/healthintel/blob/main/DEPLOYMENT_GUIDE.md" class="demo-btn secondary" target="_blank">
+                🚀 Deploy Full Version
+            </a>
+        </div>
+    </div>
+</body>
+</html>

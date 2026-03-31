@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setup Patient Profile Features</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .step { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .btn { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .btn:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Setup Patient Profile Features</h1>
+        
+        <div class="step">
+            <h2>Step 1: Create Missing Database Tables</h2>
+            <p>This will create the required tables for 2-way data synchronization and payments.</p>
+            <button class="btn" onclick="runScript('create_missing_tables.php')">Create Tables</button>
+            <div id="tables-result"></div>
+        </div>
+
+        <div class="step">
+            <h2>Step 2: Add Sample Data</h2>
+            <p>This will add sample medical history and bills to test the features.</p>
+            <button class="btn" onclick="runScript('add_sample_data.php')">Add Sample Data</button>
+            <div id="data-result"></div>
+        </div>
+
+        <div class="step">
+            <h2>Step 3: Test Patient Profile</h2>
+            <p>After completing the setup, visit your patient profile to see the new features.</p>
+            <a href="healthintel/patient/patient_profile.php" class="btn" target="_blank">Open Patient Profile</a>
+        </div>
+
+        <div class="info">
+            <h3>📋 What will be added:</h3>
+            <ul>
+                <li><strong>2-Way Data Sync:</strong> Patient and doctor medical history combined</li>
+                <li><strong>Payment System:</strong> Medical bills with payment processing</li>
+                <li><strong>Sample Data:</strong> Test medical history and bills</li>
+                <li><strong>Enhanced AI:</strong> AI summary includes both patient and doctor data</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function runScript(scriptName) {
+            const resultDiv = scriptName === 'create_missing_tables.php' ? 
+                document.getElementById('tables-result') : 
+                document.getElementById('data-result');
+            
+            resultDiv.innerHTML = '<div class="info">Running script...</div>';
+            
+            fetch(scriptName)
+                .then(response => response.text())
+                .then(data => {
+                    resultDiv.innerHTML = '<div class="success"><pre>' + data + '</pre></div>';
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = '<div class="error">Error: ' + error.message + '</div>';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+name: Deploy MedoFolio
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, mysql, curl
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g @vercel/ncc
+        
+    - name: Build application
+      run: |
+        # Create a build script for deployment
+        cat > build.php << 'EOF'
+        <?php
+        // MedoFolio Production Build
+        // This creates a production-ready version
+        
+        // Database configuration will be handled by environment variables
+        \$db_config = "<?php\n";
+        \$db_config .= "// Database configuration\n";
+        \$db_config .= "\$servername = getenv('DB_HOST') ?: 'localhost';\n";
+        \$db_config .= "\$username = getenv('DB_USER') ?: 'root';\n";
+        \$db_config .= "\$password = getenv('DB_PASSWORD') ?: '';\n";
+        \$db_config .= "\$dbname = getenv('DB_NAME') ?: 'medofolio';\n";
+        \$db_config .= "\n";
+        \$db_config .= "\$conn = mysqli_connect(\$servername, \$username, \$password, \$dbname);\n";
+        \$db_config .= "if (!\$conn) {\n";
+        \$db_config .= "    die('Connection failed: ' . mysqli_connect_error());\n";
+        \$db_config .= "}\n";
+        \$db_config .= "?>";
+        
+        file_put_contents('db.php', \$db_config);
+        
+        // Create production index
+        \$index_content = file_get_contents('index.html');
+        file_put_contents('index.html', \$index_content);
+        
+        echo "Build completed successfully!\n";
+        ?>
+        
+        php build.php
+        
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: \${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: \${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: \${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+        
+    - name: Deploy to Railway
+      uses: railway-app/railway-action@v1
+      with:
+        api-token: \${{ secrets.RAILWAY_TOKEN }}
+        service: medofolio
